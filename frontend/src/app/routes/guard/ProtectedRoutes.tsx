@@ -1,6 +1,6 @@
 import Layout from "@/app/layout/Layout";
 import { useAppStore } from "@/app/store/AppStore";
-import { Navigate, Outlet } from "react-router";
+import { Navigate } from "react-router";
 import { ROUTES } from "../routesConfig";
 
 export const ProtectedLayout = () => {
@@ -12,7 +12,6 @@ export const ProtectedLayout = () => {
 
   return (
     <Layout>
-      <Outlet />
     </Layout>
   );
 };

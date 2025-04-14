@@ -1,40 +1,73 @@
-import { BookOpen, Calendar, Home, LineChart, Printer, Settings, Users } from "lucide-react";
+import {
+  BookOpen,
+  Calendar,
+  Home,
+  LineChart,
+  LucideProps,
+  Printer,
+  Settings,
+  Users,
+} from "lucide-react";
+export interface ItemsProps {
+  title: string;
+  url: string;
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
+}
 
-export const items = [
+export const itemsAdmin:ItemsProps[] = [
   {
     title: "Inicio",
-    url: "/home",
+    url: "/dashboard",
     icon: Home,
   },
   {
     title: "Estudiantes",
-    url: "/alumnos",
+    url: "/dashboard/alumnos",
     icon: Users,
   },
   {
     title: "Calendario",
-    url: "/calendar",
+    url: "/dashboard/calendar",
     icon: Calendar,
   },
   {
     title: "Clases",
-    url: "/clases",
+    url: "/dashboard/clases",
     icon: BookOpen,
   },
-
   {
     title: "Reportes",
-    url: "/reportes",
+    url: "/dashboard/reportes",
     icon: Printer,
   },
   {
     title: "Calificaciones",
-    url: "/calificaciones",
+    url: "/dashboard/calificaciones",
     icon: LineChart,
   },
   {
     title: "Configuración",
     url: "#",
     icon: Settings,
+  },
+];
+
+export const itemsTeacher:ItemsProps[]  = [
+  {
+    title: "Inicio",
+    url: "/dashboard",
+    icon: Home,
+  },
+  {
+    title: "Estudiantes",
+    url: "/dashboard/alumnos",
+    icon: Users,
+  },
+  {
+    title: "Calendario",
+    url: "/dashboard/calendar",
+    icon: Calendar,
   },
 ];

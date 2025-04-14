@@ -1,34 +1,38 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
-
-interface User {
+export enum UserRole {
+  ADMIN = "admin",
+  TEACHER = "teacher",
+  STUDENT = "student",
+}
+export interface User {
+  token: string;
   name: string;
-  email: string;
-  password: string;
+  role: UserRole;
 }
 interface AppState {
   user: User | undefined;
   isLogged: boolean;
+  token: string | undefined;
   login: (user: User) => void;
   logout: () => void;
-
 }
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
       user: undefined,
       isLogged: false,
+      token:'',
       login: (user: User) => {
-        set({ user, isLogged: true });
+        set({ user, isLogged: true, token: user.token });
       },
       logout: () => {
-        set({ user: undefined, isLogged: false });
+        set({ user: undefined, isLogged: false,token: undefined });
       },
     }),
     {
-      name: "manage-school",
+      name: "edusmart",
     }
   )
-)
+);

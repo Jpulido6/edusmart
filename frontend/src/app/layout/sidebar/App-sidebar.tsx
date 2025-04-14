@@ -1,4 +1,5 @@
-
+import React from "react";
+import { LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -8,11 +9,19 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { items } from "./itemRoute.config"
+} from "@/components/ui/sidebar";
+import { itemsAdmin, ItemsProps, itemsTeacher } from "./itemRoute.config";
+import { useAppStore, UserRole } from "@/app/store/AppStore";
 
+export function AppSidebar() {
+  const [items, setItems] = React.useState<ItemsProps[]>([]);
+  const onLogOut = useAppStore((state) => state.logout);
+  const role = useAppStore((state) => state.user?.role);
+  React.useEffect(() => {
+    if(role === UserRole.ADMIN) setItems(itemsAdmin)
+      else setItems(itemsTeacher)
+  }, [role]);
 
-export function AppSidebar() { 
   return (
     <Sidebar>
       <SidebarContent>
@@ -30,10 +39,15 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+              <div>
+                <LogOut onClick={onLogOut} className="cursor-pointer">
+                  Cerrar sesion
+                </LogOut>
+              </div>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

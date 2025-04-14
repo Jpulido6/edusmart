@@ -7,6 +7,7 @@ import TestimonialCard from "../components/TestimonialCard";
 import FeatureCard from "../components/FeatureCard";
 import useLanding from "../view-model/useLanding";
 import { GraduationCap } from "lucide-react";
+import { ROUTES } from "@/app/routes/routesConfig";
 
 export default function LandingPage() {
   const { itemsFeature, itemsTestimonial, itemsPricing, itemsFaq } =
@@ -38,11 +39,11 @@ export default function LandingPage() {
             </a>
           </nav>
           <div className="flex items-center space-x-4">
-            <Link to="/login" className="text-gray-600 hover:text-primary">
+            <Link to={ROUTES.PUBLIC.LOGIN} className="text-gray-600 hover:text-primary">
               Iniciar sesión
             </Link>
             <Button asChild>
-              <Link to="/register">Registrarse</Link>
+              <Link to={ROUTES.PUBLIC.REGISTER}>Registrarse</Link>
             </Button>
           </div>
         </div>

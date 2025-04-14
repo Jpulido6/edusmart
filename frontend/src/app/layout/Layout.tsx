@@ -16,24 +16,24 @@ import { Separator } from "@radix-ui/react-separator";
 import { ModeToggle } from "@/components/theme/mode-toggle";
 import { useAppStore } from "../store/AppStore";
 import { UserCircle } from "lucide-react";
-import { useLocation } from "react-router";
+import { Outlet, useLocation } from "react-router";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout() {
   const route = useLocation();
 
   const pathNameString = (pathName: string) => {
     switch (pathName) {
-      case "/home":
+      case "/dashboard":
         return "Inicio";
-      case "/alumnos":
+      case "/dashboard/alumnos":
         return "Estudiantes";
-      case "/calendar":
+      case "/dashboard/calendar":
         return "Calendario";
-      case "/clases":
+      case "/dashboard/clases":
         return "Clases";
-      case "/reportes":
+      case "/dashboard/reportes":
         return "Reportes";
-      case "/calificaciones":
+      case "/dashboard/calificaciones":
         return "Calificaciones";
       default:
         return pathName;
@@ -71,7 +71,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <ModeToggle />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
+        <div className="flex flex-1 flex-col gap-4 p-4"><Outlet/></div>
       </SidebarInset>
     </SidebarProvider>
   );

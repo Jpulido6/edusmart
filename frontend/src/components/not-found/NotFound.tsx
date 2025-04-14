@@ -13,7 +13,7 @@ export default function NotFound({ text }: NotFoundProps) {
           <span className="text-muted-foreground">{text ? text : " "}</span>
         </p>
         <Link
-          to="/home"
+          to="/"
           className="text-center font-bold text-primary-500 hover:text-primary-600 transition-colors duration-200 ease-in-out"
         >
           {" "}

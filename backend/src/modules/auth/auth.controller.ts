@@ -2,7 +2,6 @@ import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserRole } from 'src/infraestructure/database/entities/users/users.entity';
 import { AuthGuard } from '@nestjs/passport';
-import { log } from 'console';
 
 @Controller('auth')
 export class AuthController {
@@ -30,7 +29,6 @@ export class AuthController {
   @Post('profile')
   getProfile(@Request() req) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
-    console.log('req', req.user);
     return req.user;
   }
 }
