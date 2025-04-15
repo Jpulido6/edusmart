@@ -3,6 +3,7 @@ import { LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -17,9 +18,10 @@ export function AppSidebar() {
   const [items, setItems] = React.useState<ItemsProps[]>([]);
   const onLogOut = useAppStore((state) => state.logout);
   const role = useAppStore((state) => state.user?.role);
+  
   React.useEffect(() => {
-    if(role === UserRole.ADMIN) setItems(itemsAdmin)
-      else setItems(itemsTeacher)
+    if (role === UserRole.ADMIN) setItems(itemsAdmin);
+    else setItems(itemsTeacher);
   }, [role]);
 
   return (
@@ -39,15 +41,20 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              <div>
-                <LogOut onClick={onLogOut} className="cursor-pointer">
-                  Cerrar sesion
-                </LogOut>
-              </div>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <LogOut onClick={onLogOut}/>
+              cerrar sesion
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 }

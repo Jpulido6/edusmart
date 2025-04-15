@@ -1,5 +1,5 @@
 export interface ProfesorProps {
-  id?: number;
+  id?: string;
   nombres: string;
   apellidos: string;
   email: string;
@@ -15,7 +15,7 @@ export class Profesor {
     };
   }
 
-  get id(): number {
+  get id(): string {
     return this.props.id!;
   }
   get nombres(): string {

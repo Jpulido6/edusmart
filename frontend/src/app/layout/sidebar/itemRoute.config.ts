@@ -6,6 +6,7 @@ import {
   LucideProps,
   Printer,
   Settings,
+  UserPlus,
   Users,
 } from "lucide-react";
 export interface ItemsProps {
@@ -16,7 +17,45 @@ export interface ItemsProps {
   >;
 }
 
-export const itemsAdmin:ItemsProps[] = [
+export const itemsAdmin: ItemsProps[] = [
+  {
+    title: "Profesores",
+    url: "/dashboard/profesores",
+    icon: UserPlus,
+  },
+  // {
+  //   title: "Estudiantes",
+  //   url: "/dashboard/alumnos",
+  //   icon: Users,
+  // },
+  // {
+  //   title: "Calendario",
+  //   url: "/dashboard/calendar",
+  //   icon: Calendar,
+  // },
+  // {
+  //   title: "Clases",
+  //   url: "/dashboard/clases",
+  //   icon: BookOpen,
+  // },
+  // {
+  //   title: "Reportes",
+  //   url: "/dashboard/reportes",
+  //   icon: Printer,
+  // },
+  // {
+  //   title: "Calificaciones",
+  //   url: "/dashboard/calificaciones",
+  //   icon: LineChart,
+  // },
+  // {
+  //   title: "Configuración",
+  //   url: "#",
+  //   icon: Settings,
+  // },
+];
+
+export const itemsTeacher: ItemsProps[] = [
   {
     title: "Inicio",
     url: "/dashboard",
@@ -51,23 +90,5 @@ export const itemsAdmin:ItemsProps[] = [
     title: "Configuración",
     url: "#",
     icon: Settings,
-  },
-];
-
-export const itemsTeacher:ItemsProps[]  = [
-  {
-    title: "Inicio",
-    url: "/dashboard",
-    icon: Home,
-  },
-  {
-    title: "Estudiantes",
-    url: "/dashboard/alumnos",
-    icon: Users,
-  },
-  {
-    title: "Calendario",
-    url: "/dashboard/calendar",
-    icon: Calendar,
   },
 ];

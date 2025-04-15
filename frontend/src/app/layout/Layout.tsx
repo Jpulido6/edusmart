@@ -35,6 +35,8 @@ export default function Layout() {
         return "Reportes";
       case "/dashboard/calificaciones":
         return "Calificaciones";
+      case "/dashboard/profesores":
+        return "Profesores";
       default:
         return pathName;
     }

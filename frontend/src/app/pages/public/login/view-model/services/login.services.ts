@@ -5,7 +5,6 @@ import { LoginResponse } from "../../domain/response/login.response";
 
 export const onLogin = async (data: LoginDTO) => {
   const response = await api.post<LoginResponse>(ENDPOINT.AUTH.LOGIN, data);
-  console.log(response.data);
 
   return response.data;
 };

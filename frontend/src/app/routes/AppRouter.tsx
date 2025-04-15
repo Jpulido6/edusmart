@@ -9,6 +9,7 @@ import {
   NotFoundPage,
   RegisterPage,
   ReportesPage,
+  ProfesoresPage
 } from "./LazyImports";
 import { ROUTES } from "./routesConfig";
 import LoginPage from "../pages/public/login/presentation/Login";
@@ -46,6 +47,7 @@ export default function AppRouter() {
           <Route path={ROUTES.PRIVATE.CALENDAR} element={<CalendarioPage />} />
           <Route path={ROUTES.PRIVATE.CLASSES} element={<ClasesPage />} />
           <Route path={ROUTES.PRIVATE.REPORTS} element={<ReportesPage />} />
+          <Route path={ROUTES.PRIVATE.PROFESSOR} element={<ProfesoresPage />} />
         </Route>
 
         <Route path={ROUTES.PUBLIC.NOT_FOUND} element={<NotFoundPage />} />

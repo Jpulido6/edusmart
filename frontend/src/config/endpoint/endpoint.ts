@@ -6,4 +6,8 @@ export const ENDPOINT = {
     REGISTER: `${LOCALHOST}/auth/register`,
     PROFILE: `${LOCALHOST}/auth/profile`,
   },
+  PROFESOR: {
+    CREAR: `${LOCALHOST}/profesor/crear`,
+    BUSCAR: `${LOCALHOST}/profesor/crear-profesor`,
+  },
 };

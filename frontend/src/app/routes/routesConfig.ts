@@ -13,5 +13,6 @@ export const ROUTES = {
     CALENDAR: "/dashboard/calendar",
     GRADES: "/dashboard/calificaciones",
     REPORTS: "/dashboard/reportes",
+    PROFESSOR:"/dashboard/profesores"
   },
 } as const;

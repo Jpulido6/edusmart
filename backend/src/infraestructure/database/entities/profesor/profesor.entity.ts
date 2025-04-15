@@ -1,11 +1,10 @@
 import { Profesor } from 'src/core/domain/entities/profesor.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Grados } from '../grados/grados.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('profesor')
 export class ProfesorEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   nombres: string;
@@ -19,8 +18,8 @@ export class ProfesorEntity {
   @Column()
   especialidad: string;
 
-  @OneToMany(() => Grados, (grade) => grade.id)
-  gradedAssignments: Grados[];
+  // @OneToMany(() => Grados, (grade) => grade.id)
+  // gradedAssignments: Grados[];
 
   //   @OneToMany(() => Event, (event) => event.organizer)
   //   events: Event[];
