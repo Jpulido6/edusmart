@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   ForbiddenException,
+  Get,
   Post,
   Request,
   UseGuards,
@@ -30,6 +31,16 @@ export class ProfesorController {
       status: 200,
       message: 'Profesor creado exitosamente',
       data: profesorEntity,
+    };
+  }
+
+  @Get('buscar')
+  async getAllProfessors() {
+    const profesors = await this.createProfesorService.getAllProfessors();
+    return {
+      status: 200,
+      message: 'Profesores obtenidos exitosamente',
+      data: profesors,
     };
   }
 }

@@ -29,5 +29,10 @@ export class CrearProfesorService {
       email: data.email,
     });
     return profesor;
+    
+  }
+  async getAllProfessors(): Promise<Profesor[]> {
+    const profesors = await this.proRepository.buscar();
+    return profesors;
   }
 }

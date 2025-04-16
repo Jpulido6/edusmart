@@ -27,10 +27,11 @@ export default function useLogin() {
     mutationFn: onLogin,
     onSuccess: (data) => {
       console.log(data);
-      const { accessToken, user } = data;
+      const { access_token, user } = data; 
+      localStorage.setItem("token", data.access_token);
 
       const userLogin: User = {
-        token: accessToken,
+        token: access_token,
         name: user.name,
         role: user.role,
       };
