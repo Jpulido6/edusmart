@@ -18,3 +18,9 @@ export interface Profesor {
   email?: string;
   curso: Curso;
 }
+
+export interface Response<T> {
+  status: number,
+  message: string,
+  data: T
+}

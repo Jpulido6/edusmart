@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   ForbiddenException,
+  Get,
   Post,
   Request,
   UseGuards,
@@ -13,23 +14,35 @@ import { ProfesorEntity } from 'src/infraestructure/database/entities/profesor/p
 
 @Controller('profesor')
 export class ProfesorController {
-  constructor(private readonly createProfesorService: CrearProfesorService) {}
+  constructor(private readonly createProfesorService: CrearProfesorService) { }
 
   @Post('crear')
   @UseGuards(JwtAuthGuard)
-  async createProfesor(@Body() createproDto: CrearProfesorDto, @Request() req) {
+  async createProfesor(@Body() createProDto: CrearProfesorDto, @Request() req) {
     if (req.user.role !== 'admin') {
       throw new ForbiddenException(
         'Solo administradores pueden crear profesores',
       );
     }
 
-    const profesor = await this.createProfesorService.execute(createproDto);
+    const profesor = await this.createProfesorService.execute(createProDto);
     const profesorEntity = ProfesorEntity.fromDomain(profesor);
     return {
       status: 200,
       message: 'Profesor creado exitosamente',
       data: profesorEntity,
     };
+  }
+
+  @Get('buscar')
+  @UseGuards(JwtAuthGuard)
+  async buscarPRofesor() {
+    const profesor = await this.createProfesorService.buscarTodos()
+
+    return {
+      status: 200,
+      message: 'Profesores encontrados',
+      data: profesor
+    }
   }
 }

@@ -26,11 +26,11 @@ export default function useLogin() {
   const { isPending, mutate } = useMutation({
     mutationFn: onLogin,
     onSuccess: (data) => {
-      console.log(data);
-      const { accessToken, user } = data;
+      const { access_token, user } = data;
+      localStorage.setItem('token',access_token)
 
       const userLogin: User = {
-        token: accessToken,
+        token: access_token,
         name: user.name,
         role: user.role,
       };
@@ -40,7 +40,7 @@ export default function useLogin() {
     onError: (error) => {
       toast.toast({
         title: "Error",
-        description: `Error al iniciar sesion ${error.message}`,
+        description: `Error al iniciar sesión ${error.message}`,
         action: <ToastAction altText="Cerrar">Cerrar</ToastAction>,
       });
     },

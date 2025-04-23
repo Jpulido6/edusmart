@@ -4,7 +4,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { profesorService } from "../service/profesor.services";
+import { createProfesor } from "../service/profesor.services";
 import { profesorDto } from "../domain/dto/profesor.dto";
 
 const formSchema = z.object({
@@ -25,7 +25,7 @@ const formSchema = z.object({
 export const useFormProfesor = () => {
   const toast = useToast();
   const { mutate, isPending } = useMutation({
-    mutationFn: profesorService,
+    mutationFn: createProfesor,
     onSuccess: (data) => {
       console.log(data);
       toast.toast({

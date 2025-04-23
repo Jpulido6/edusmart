@@ -18,7 +18,13 @@ export function AppSidebar() {
   const [items, setItems] = React.useState<ItemsProps[]>([]);
   const onLogOut = useAppStore((state) => state.logout);
   const role = useAppStore((state) => state.user?.role);
-  
+
+  const handleLogOut = () => {
+    console.log('cerrar');
+    
+    onLogOut()
+    localStorage.removeItem('token')
+  }
   React.useEffect(() => {
     if (role === UserRole.ADMIN) setItems(itemsAdmin);
     else setItems(itemsTeacher);
@@ -48,9 +54,9 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
-              <LogOut onClick={onLogOut}/>
-              cerrar sesion
+            <SidebarMenuButton onClick={handleLogOut}>
+              <LogOut />
+              Cerrar sesión
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

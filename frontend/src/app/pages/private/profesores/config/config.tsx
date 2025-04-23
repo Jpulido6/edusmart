@@ -6,15 +6,15 @@ import {
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-} from "@radix-ui/react-dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import FormAlumno from "../../alumnos/components/FormAlumnos";
 import { Profesor } from "../domain/entities/profesor.entity";
 
-const columns: ColumnDef<Profesor>[] = [
+export const columns: ColumnDef<Profesor>[] = [
   {
-    accessorKey: "nombre",
+    accessorKey: "nombres",
     header: ({ column }) => {
       return (
         <Button
@@ -27,24 +27,24 @@ const columns: ColumnDef<Profesor>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("nombre")}</div>
+      <div className="capitalize">{row.getValue("nombres")}</div>
     ),
   },
   {
-    accessorKey: "apellido",
+    accessorKey: "apellidos",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Apellido
+          Apellidos
           <ArrowUpDown />
         </Button>
       );
     },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("apellido")}</div>
+      <div className="capitalize">{row.getValue("apellidos")}</div>
     ),
   },
   {
@@ -115,4 +115,3 @@ const columns: ColumnDef<Profesor>[] = [
   },
 ];
 
-export default columns

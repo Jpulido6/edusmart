@@ -3,6 +3,7 @@ export class Profesor {
     private _id: number,
     private _nombres: string,
     private _apellidos: string,
+    private _email:string,
     private _materia: string
   ) {}
 
@@ -14,6 +15,9 @@ export class Profesor {
   }
   get apellidos() {
     return this._apellidos;
+  }
+  get email(){
+    return this._email
   }
   get materia() {
     return this._materia;

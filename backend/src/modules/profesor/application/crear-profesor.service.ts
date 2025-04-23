@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IProfesorRepository } from 'src/core/domain/interfaces/profesor.interface';
 import { Profesor } from 'src/core/domain/entities/profesor.entity';
+import { ProfesorPostgresRepository } from '../infraestructure/profesor.repository';
 
 @Injectable()
 export class CrearProfesorService {
   constructor(
     @Inject('IProfesorRepository')
-    private readonly proRepository: IProfesorRepository,
-  ) {}
+    private readonly proRepository: ProfesorPostgresRepository,
+  ) { }
 
   async execute(data: {
     nombres: string;
@@ -15,19 +15,26 @@ export class CrearProfesorService {
     email: string;
     especialidad: string;
   }): Promise<Profesor> {
-    const existeProfesor = await this.proRepository.buscarbyEmail(data.email);
+    const existeProfesor = await this.proRepository.buscarByEmail(data.email);
 
     if (existeProfesor) {
       throw new Error('Profesor con este email ya existe');
     }
 
     const profesor = new Profesor({
-      ...data,
-      id: `PRO-${crypto.randomUUID()}`,
       nombres: data.nombres,
       apellidos: data.apellidos,
       email: data.email,
+      especialidad: data.especialidad
     });
+
+    await this.proRepository.crear(profesor)
     return profesor;
+  }
+
+  async buscarTodos(): Promise<Profesor[]> {
+    const profesores = await this.proRepository.buscar()
+
+    return profesores
   }
 }

@@ -1,3 +1,5 @@
+import { randomUUID } from "crypto";
+
 export interface ProfesorProps {
   id?: string;
   nombres: string;
@@ -12,6 +14,7 @@ export class Profesor {
   constructor(props: ProfesorProps) {
     this.props = {
       ...props,
+      id: props.id || randomUUID()
     };
   }
 

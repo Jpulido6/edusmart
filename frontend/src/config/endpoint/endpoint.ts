@@ -1,4 +1,4 @@
-export const LOCALHOST = "http://localhost:3000";
+export const LOCALHOST = "http://localhost:3001";
 
 export const ENDPOINT = {
   AUTH: {
@@ -8,6 +8,6 @@ export const ENDPOINT = {
   },
   PROFESOR: {
     CREAR: `${LOCALHOST}/profesor/crear`,
-    BUSCAR: `${LOCALHOST}/profesor/crear-profesor`,
+    BUSCAR: `${LOCALHOST}/profesor/buscar`,
   },
 };
