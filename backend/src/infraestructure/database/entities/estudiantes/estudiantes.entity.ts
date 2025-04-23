@@ -3,9 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { GradosEntity } from '../grados/grados.entity';
 
 @Entity('estudiantes')
 export class EstudianteEntity {
@@ -32,9 +36,11 @@ export class EstudianteEntity {
 
   @Column({ default: true })
   isActive: boolean;
+  
 
   // Relaciones con otras entidades
-  // @OneToMany(() => GradeEntity, grade => grade.student)
+  @ManyToOne(() => GradosEntity, grado => grado.estudiantes)
+  grado: GradosEntity;
   // grades: GradeEntity[];
 
   // @OneToMany(() => TaskEntity, task => task.student)

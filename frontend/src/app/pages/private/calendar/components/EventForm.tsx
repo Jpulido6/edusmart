@@ -10,12 +10,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { DatePicker } from "./DayPickerEvent";
 import { useStoreCalendar } from "../domain/useStoreCalendar";
+import React from "react";
+import { setHours, setMinutes } from "date-fns";
+import { ToastAction } from "@/components/ui/toast";
 
 export const FormSchema = z.object({
   title: z
@@ -28,10 +31,13 @@ export const FormSchema = z.object({
   }),
 });
 export default function EventForm() {
+  const toast = useToast()
   // const { setHasEvent, hasEvent } = useCalendar();
+  const [horas, setHoras] = React.useState<string>();
+  const [fechaEvento, setFechaEvento] = React.useState<Date>();
   const setHasEvent = useStoreCalendar((state) => state.setHasEvent);
-    const setIsLoading = useStoreCalendar((state) => state.setIsLoading);
-  
+  const setIsLoading = useStoreCalendar((state) => state.setIsLoading);
+
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -40,19 +46,27 @@ export default function EventForm() {
   function onSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true);
     setHasEvent(false);
-    toast({
-      title: "You submitted the following values:",
+    
+
+    toast.toast({
+      title: "Evento creado",
       description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
+        <span className="text-sm font-normal">
+          El evento se ha creado con éxito para el dia {fechaEvento!.toLocaleString()}
+        </span>
       ),
-    });
+      action: (
+        <ToastAction altText="Cerrar" className="font-normal">
+          Cerrar
+        </ToastAction>
+      )
+    })
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
-      
-  }
+
+  } 
+  const onChangeFecha = (d:Date) => setFechaEvento(d)
 
   return (
     <Form {...form}>
@@ -86,6 +100,8 @@ export default function EventForm() {
                   label="Fecha del evento"
                   date={field.value}
                   setDate={field.onChange}
+                  hours={setHoras}
+                  fechaEvent={onChangeFecha}
                 />
               </FormControl>
               <FormMessage />

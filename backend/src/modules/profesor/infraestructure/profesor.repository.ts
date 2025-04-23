@@ -19,14 +19,14 @@ export class ProfesorPostgresRepository implements IProfesorRepository {
     const profEntity = await this.profesorRepo.find();
     return profEntity.map((profEntity) => profEntity.toDomain());
   }
-  async buscarbyEmail(email: string): Promise<Profesor | null> {
+  async buscarByEmail(email: string): Promise<Profesor | null> {
     const profEntity = await this.profesorRepo.findOne({ where: { email } });
     return profEntity ? profEntity.toDomain() : null;
   }
 
   private mapToEntity(pro: Profesor): ProfesorEntity {
     return {
-      id: pro.id,
+      id: crypto.randomUUID(),
       nombres: pro.nombres,
       apellidos: pro.apellidos,
       email: pro.email,

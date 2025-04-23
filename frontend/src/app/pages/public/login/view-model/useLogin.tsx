@@ -41,7 +41,7 @@ export default function useLogin() {
     onError: (error) => {
       toast.toast({
         title: "Error",
-        description: `Error al iniciar sesion ${error.message}`,
+        description: `Error al iniciar sesión ${error.message}`,
         action: <ToastAction altText="Cerrar">Cerrar</ToastAction>,
       });
     },

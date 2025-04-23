@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, nativeImage } = require('electron');
 const path = require('path');
 const { spawn } = require('child_process');
 
@@ -8,6 +8,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1280,
     height: 800,
+    icon: path.join(__dirname, 'assets', 'graduation.ico'),
     webPreferences: {
       contextIsolation: true,
     },
@@ -17,11 +18,11 @@ function createWindow() {
   // win.loadFile(path.join(__dirname, '../frontend/dist/index.html'));
 
   // En desarrollo, podrías usar:
-  win.loadURL('http://localhost:5173'); // si usas Vite
+  win.loadURL('http://localhost:5173'); 
 }
 
 function startBackend() {
-  backendProcess = spawn('npm', ['run', 'start'], {
+  backendProcess = spawn('npm', ['run', 'start:dev'], {
     cwd: path.join(__dirname, '../backend'),
     shell: true,
     stdio: 'inherit',

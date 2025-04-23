@@ -1,14 +1,10 @@
 import { Grado } from 'src/core/domain/entities/grado.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { EstudianteEntity } from '../estudiantes/estudiantes.entity';
 
-export class GradosEntity {
-  id: number;
-  nombre: string;
-  codigo: string;
-}
 @Entity('grados')
-export class Grados {
-  @PrimaryGeneratedColumn()
+export class GradosEntity {
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
@@ -16,6 +12,9 @@ export class Grados {
 
   @Column()
   codigo: string;
+
+  @OneToMany(()=>EstudianteEntity, estudiante => estudiante.grado)
+  estudiantes: EstudianteEntity[]
 
   static fromDomain(grado: Grado): GradosEntity {
     const entity = new GradosEntity();

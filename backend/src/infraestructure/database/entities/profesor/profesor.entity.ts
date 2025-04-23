@@ -1,14 +1,14 @@
-import { Profesor } from 'src/core/domain/entities/profesor.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Profesor } from 'src/core/domain/entities/profesor.entity';
 
 @Entity('profesor')
 export class ProfesorEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   nombres: string;
-
+  
   @Column()
   apellidos: string;
 
@@ -18,18 +18,9 @@ export class ProfesorEntity {
   @Column()
   especialidad: string;
 
-  // @OneToMany(() => Grados, (grade) => grade.id)
-  // gradedAssignments: Grados[];
-
-  //   @OneToMany(() => Event, (event) => event.organizer)
-  //   events: Event[];
-
-  //   @OneToMany(() => Task, (task) => task.assignedBy)
-  //   assignedTasks: Task[];
-
   static fromDomain(profesor: Profesor): ProfesorEntity {
     const entity = new ProfesorEntity();
-    entity.id = profesor.id;
+    if (profesor.id) entity.id = profesor.id;    
     entity.nombres = profesor.nombres;
     entity.apellidos = profesor.apellidos;
     entity.email = profesor.email;
