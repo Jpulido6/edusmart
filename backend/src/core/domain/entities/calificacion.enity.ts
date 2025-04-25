@@ -1,0 +1,67 @@
+import { Asignatura } from "./asignatura.entity";
+import { Estudiante } from "./estudiantes.entity";
+import { Grado } from "./grado.entity";
+
+export class CalificacionProps {
+    id?: string;
+    nota1: number;
+    nota2: number;
+    nota3: number;
+    nota4: number;
+    nota5: number;
+    notaFinal: number;
+    estudiante: Estudiante;
+    asignatura: Asignatura;
+    grado: Grado;
+    periodoId: string;
+}
+
+export class Calificacion {
+    private readonly props: CalificacionProps;
+
+    constructor(props: CalificacionProps) {
+        this.props = {
+            ...props,
+            id: props.id || this.generateId(),
+        };
+    }
+
+    private generateId(): string {
+        return `CAL-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    }
+
+    get id(): string {
+        return this.props.id!;
+    }
+    get nota1(): number {
+        return this.props.nota1;
+    }
+    get nota2(): number {
+        return this.props.nota2;
+    }
+    get nota3(): number {
+        return this.props.nota3;
+    }
+    get nota4(): number {
+        return this.props.nota4;
+    }
+    get nota5(): number {
+        return this.props.nota5;
+    }
+    get notaFinal(): number {
+        return this.props.notaFinal;
+    }
+    get estudiante(): Estudiante {
+        return this.props.estudiante;
+    }
+    get asignatura(): Asignatura {
+        return this.props.asignatura;
+    }
+    get grado(): Grado {
+        return this.props.grado;
+    }
+    get periodoId(): string {
+        return this.props.periodoId;
+    }
+
+}

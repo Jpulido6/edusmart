@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { GradosEntity } from '../grados/grados.entity';
+import { CalificacionEntity } from '../calificaciones/calificaciones.entity';
 
 @Entity('estudiantes')
 export class EstudianteEntity {
@@ -41,7 +42,9 @@ export class EstudianteEntity {
   // Relaciones con otras entidades
   @ManyToOne(() => GradosEntity, grado => grado.estudiantes)
   grado: GradosEntity;
-  // grades: GradeEntity[];
+
+  @OneToMany(() => CalificacionEntity, calificacion => calificacion.estudiante)
+  calificaciones: CalificacionEntity[];
 
   // @OneToMany(() => TaskEntity, task => task.student)
   // tasks: TaskEntity[];
