@@ -44,7 +44,6 @@ export const useFormProfesor = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Aquí iría la lógica para enviar los datos al servidor
     const data: profesorDto = {
       nombres: values.nombres,
       apellidos: values.apellidos,

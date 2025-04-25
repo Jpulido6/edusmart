@@ -30,6 +30,11 @@ export class CrearProfesorService {
 
     await this.proRepository.crear(profesor)
     return profesor;
+    
+  }
+  async getAllProfessors(): Promise<Profesor[]> {
+    const profesors = await this.proRepository.buscar();
+    return profesors;
   }
 
   async buscarTodos(): Promise<Profesor[]> {

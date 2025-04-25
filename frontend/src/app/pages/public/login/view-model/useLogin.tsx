@@ -26,8 +26,9 @@ export default function useLogin() {
   const { isPending, mutate } = useMutation({
     mutationFn: onLogin,
     onSuccess: (data) => {
-      const { access_token, user } = data;
-      localStorage.setItem('token',access_token)
+      console.log(data);
+      const { access_token, user } = data; 
+      localStorage.setItem("token", data.access_token);
 
       const userLogin: User = {
         token: access_token,

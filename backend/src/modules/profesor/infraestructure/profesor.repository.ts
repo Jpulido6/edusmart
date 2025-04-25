@@ -10,7 +10,7 @@ export class ProfesorPostgresRepository implements IProfesorRepository {
   constructor(
     @InjectRepository(ProfesorEntity)
     private readonly profesorRepo: Repository<ProfesorEntity>,
-  ) { }
+  ) {}
   async crear(pro: Profesor): Promise<void> {
     const prof = this.mapToEntity(pro);
     await this.profesorRepo.save(prof);
@@ -26,7 +26,7 @@ export class ProfesorPostgresRepository implements IProfesorRepository {
 
   private mapToEntity(pro: Profesor): ProfesorEntity {
     return {
-      id:crypto.randomUUID(),      
+      id: crypto.randomUUID(),
       nombres: pro.nombres,
       apellidos: pro.apellidos,
       email: pro.email,

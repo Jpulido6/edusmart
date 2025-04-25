@@ -35,14 +35,12 @@ export class ProfesorController {
   }
 
   @Get('buscar')
-  @UseGuards(JwtAuthGuard)
-  async buscarPRofesor() {
-    const profesor = await this.createProfesorService.buscarTodos()
-
+  async getAllProfessors() {
+    const profesors = await this.createProfesorService.getAllProfessors();
     return {
       status: 200,
-      message: 'Profesores encontrados',
-      data: profesor
-    }
+      message: 'Profesores obtenidos exitosamente',
+      data: profesors,
+    };
   }
 }
