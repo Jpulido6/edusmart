@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CalificacionEntity } from "../calificaciones/calificaciones.entity";
 import { Asignatura } from "src/core/domain/entities/asignatura.entity";
-import { ProfesorAsignaturaEntity } from "../profesor-asignatura/profesor-asignatura.entity";
+import { ProfesorEntity } from "../profesor/profesor.entity";
 
 @Entity('asignaturas')
 export class AsignaturaEntity {
@@ -14,8 +14,8 @@ export class AsignaturaEntity {
     @OneToMany(() => CalificacionEntity, calificacion => calificacion.asignatura)
     calificaciones: CalificacionEntity[];
 
-    @OneToMany(() => ProfesorAsignaturaEntity, ps => ps.asignatura)
-    profesoresAsignados: ProfesorAsignaturaEntity[];
+    @OneToMany(() => ProfesorEntity, ps => ps.asignatura)
+    profesores: ProfesorEntity[]
 
 
     static fromDomain(asignatura: Asignatura): AsignaturaEntity {
@@ -23,7 +23,7 @@ export class AsignaturaEntity {
         entity.id = asignatura.id;
         entity.nombre = asignatura.nombre;
         entity.calificaciones = asignatura.calificaciones?.map(calificacion => CalificacionEntity.fromDomain(calificacion)) || [];
-        entity.profesoresAsignados = asignatura.profesoresAsignados?.map(ps => ProfesorAsignaturaEntity.fromDomain(ps)) || [];
+        entity.profesores = asignatura.profesor?.map(ps => ProfesorEntity.fromDomain(ps)) || [];
         return entity;
     }
 
@@ -32,7 +32,7 @@ export class AsignaturaEntity {
             id: this.id,
             nombre: this.nombre,
             calificaciones: this.calificaciones?.map(calificacion => calificacion.toDomain()),
-            profesoresAsignados: this.profesoresAsignados?.map(ps => ps.toDomain())
+            profesor: this.profesores?.map(ps => ps.toDomain())
         });
     }
 }

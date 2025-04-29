@@ -2,6 +2,7 @@ import { Grado } from 'src/core/domain/entities';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { EstudianteEntity } from '../estudiantes/estudiantes.entity';
 import { ProfesorAsignaturaEntity } from '../profesor-asignatura/profesor-asignatura.entity';
+import { ProfesorEntity } from '../profesor/profesor.entity';
 
 @Entity('grados')
 export class GradosEntity {
@@ -17,8 +18,8 @@ export class GradosEntity {
   @OneToMany(()=>EstudianteEntity, estudiante => estudiante.grado)
   estudiantes: EstudianteEntity[]
 
-  @OneToMany(() => ProfesorAsignaturaEntity, ps => ps.grado)
-  profesoresAsignados: ProfesorAsignaturaEntity[];
+  @OneToMany(() => ProfesorEntity, ps => ps.grado)
+  profesores: ProfesorEntity[];
 
   static fromDomain(grado: Grado): GradosEntity {
     const entity = new GradosEntity();
@@ -26,7 +27,7 @@ export class GradosEntity {
     entity.nombre = grado.nombre;
     entity.codigo = grado.codigo;
     entity.estudiantes = grado.estudiantes?.map(estudiante => EstudianteEntity.fromDomain(estudiante)) || [];
-    entity.profesoresAsignados = grado.profesoresAsignados?.map(ps => ProfesorAsignaturaEntity.fromDomain(ps)) || [];
+    entity.profesores = grado.profesores?.map(ps => ProfesorEntity.fromDomain(ps)) || [];
     return entity;
   }
   toDomain(): Grado {
@@ -35,7 +36,7 @@ export class GradosEntity {
       nombre: this.nombre,
       codigo: this.codigo,
       estudiantes: this.estudiantes?.map(estudiante => estudiante.toDomain()),
-      profesoresAsignados: this.profesoresAsignados?.map(ps => ps.toDomain())
+      profesores: this.profesores?.map(ps => ps.toDomain())
     });
   }
 }

@@ -24,50 +24,43 @@ export class EstudianteEntity {
   lastName: string;
 
   @Column({ unique: true, length: 150 })
-  email: string;
-
-  @Column({ nullable: true, length: 20 })
-  studentCode?: string;
+  identificacion: string;
 
   @CreateDateColumn()
-  enrollmentDate: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
 
   @Column({ default: true })
   isActive: boolean;
-  
 
-  // Relaciones con otras entidades
   @ManyToOne(() => GradosEntity, grado => grado.estudiantes)
   grado: GradosEntity;
 
   @OneToMany(() => CalificacionEntity, calificacion => calificacion.estudiante)
   calificaciones: CalificacionEntity[];
 
-  // @OneToMany(() => TaskEntity, task => task.student)
-  // tasks: TaskEntity[];
-
-  // Método estático para mapear del modelo de dominio a entidad de base de datos
   static fromDomain(student: Estudiante): EstudianteEntity {
     const entity = new EstudianteEntity();
     entity.id = student.id;
     entity.firstName = student.firstName;
     entity.lastName = student.lastName;
-    entity.email = student.email;
-    entity.enrollmentDate = new Date();
+    entity.identificacion = student.identificacion;
+    entity.grado = GradosEntity.fromDomain(student.grado);
+    entity.calificaciones = student.calificacion.map(calificacion => CalificacionEntity.fromDomain(calificacion));
+
     return entity;
   }
 
-  // Método para convertir a modelo de dominio
   toDomain(): Estudiante {
     return new Estudiante({
       id: this.id,
       firstName: this.firstName,
       lastName: this.lastName,
-      email: this.email,
-      enrollmentDate: this.enrollmentDate,
+      identificacion: this.identificacion,
+      grado: this.grado.toDomain(),
+      calificacion: this.calificaciones.map(calificacion => calificacion.toDomain()),
     });
   }
 }

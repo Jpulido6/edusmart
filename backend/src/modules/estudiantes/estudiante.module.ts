@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EstudianteEntity } from 'src/infraestructure/database/entities/estudiantes/estudiantes.entity';
-import { CrearEstudianteService } from './application/crear-estudiante.service';
+import { EstudianteService } from './application/estudiante.service';
 import { EstudiantePostgresRepository } from './infraestructure/estudiante.repository';
 import { EstudianteController } from './presentation/estudiante.controller';
 @Module({
@@ -11,7 +11,7 @@ import { EstudianteController } from './presentation/estudiante.controller';
       provide: 'IEstudianteRepository',
       useClass: EstudiantePostgresRepository,
     },
-    CrearEstudianteService,
+    EstudianteService,
   ],
   controllers: [EstudianteController],
   exports: [
@@ -19,7 +19,7 @@ import { EstudianteController } from './presentation/estudiante.controller';
       provide: 'IEstudianteRepository',
       useClass: EstudiantePostgresRepository,
     },
-    CrearEstudianteService,
+    EstudianteService,
   ],
 })
 export class EstudianteModule {}

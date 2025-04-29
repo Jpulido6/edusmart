@@ -1,8 +1,10 @@
 import {
     Column,
+    CreateDateColumn,
     Entity,
     ManyToOne,
     PrimaryColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 import { GradosEntity } from '../grados/grados.entity';
 import { EstudianteEntity } from '../estudiantes/estudiantes.entity';
@@ -14,6 +16,7 @@ import { AsignaturaEntity } from '../asignaturas/asignaturas.entity';
 export class CalificacionEntity {
     @PrimaryColumn('uuid')
     id: string;
+
     @Column('decimal', { precision: 5, scale: 2 })
     nota1: number;
 
@@ -38,16 +41,15 @@ export class CalificacionEntity {
     @ManyToOne(() => AsignaturaEntity, asignatura => asignatura.calificaciones)
     asignatura: AsignaturaEntity;
 
-    @ManyToOne(() => GradosEntity)
-    grado: GradosEntity;
-
     @ManyToOne(() => PeriodoEntity, periodo => periodo.calificaciones)
     periodo: PeriodoEntity;
 
-    // @OneToMany(() => TaskEntity, task => task.student)
-    // tasks: TaskEntity[];
+    @CreateDateColumn()
+    createdAt: Date;
 
-    // Método estático para mapear del modelo de dominio a entidad de base de datos
+    @UpdateDateColumn()
+    updatedAt: Date;
+
     static fromDomain(calificacion: Calificacion): CalificacionEntity {
         const entity = new CalificacionEntity();
         entity.id = calificacion.id;
@@ -59,11 +61,9 @@ export class CalificacionEntity {
         entity.notaFinal = calificacion.notaFinal;
         entity.estudiante = EstudianteEntity.fromDomain(calificacion.estudiante);
         entity.asignatura = AsignaturaEntity.fromDomain(calificacion.asignatura);
-        entity.grado = GradosEntity.fromDomain(calificacion.grado);
         return entity;
     }
 
-    // Método para convertir a modelo de dominio
     toDomain(): Calificacion {
         return new Calificacion({
             id: this.id,
@@ -75,8 +75,7 @@ export class CalificacionEntity {
             notaFinal: this.notaFinal,
             estudiante: this.estudiante.toDomain(),
             asignatura: this.asignatura.toDomain(),
-            grado: this.grado.toDomain(),
-            periodoId: this.periodo.id,
+            periodo: this.periodo.toDomain(),
         });
     }
 }

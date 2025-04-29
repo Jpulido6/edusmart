@@ -1,13 +1,8 @@
-import { Estudiante } from 'src/core/domain/entities/estudiantes.entity';
 import {
     Column,
-    CreateDateColumn,
     Entity,
-    ManyToOne,
     OneToMany,
-    OneToOne,
     PrimaryColumn,
-    UpdateDateColumn,
 } from 'typeorm';
 import { CalificacionEntity } from '../calificaciones/calificaciones.entity';
 import { Periodo } from 'src/core/domain/entities/periodo.entity';
@@ -39,7 +34,6 @@ export class PeriodoEntity {
         return entity;
     }
 
-    // Método para convertir a modelo de dominio
     toDomain(): Periodo {
         return new Periodo({
             id: this.id,

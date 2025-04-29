@@ -1,11 +1,11 @@
-import { Estudiante, ProfesorAsignatura } from ".";
+import { Estudiante, Profesor } from ".";
 
 interface GradoProps {
   id: number;
   nombre: string;
   codigo: string;
   estudiantes: Estudiante[];
-  profesoresAsignados: ProfesorAsignatura[];
+  profesores: Profesor[];
 }
 
 export class Grado {
@@ -29,7 +29,7 @@ export class Grado {
   get estudiantes(): Estudiante[] {
     return this.props.estudiantes;
   }
-  get profesoresAsignados(): ProfesorAsignatura[] {
-    return this.props.profesoresAsignados;
+  get profesores(): Profesor[] {
+    return this.props.profesores;
   }
 }

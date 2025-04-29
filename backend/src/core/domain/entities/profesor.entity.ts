@@ -1,11 +1,17 @@
 import { randomUUID } from "crypto";
+import { Asignatura, Grado } from ".";
+import { Eventos } from "./eventos.entity";
 
 export interface ProfesorProps {
   id?: string;
   nombres: string;
   apellidos: string;
-  email: string;
-  especialidad: string;
+  identificacion: string;
+  asignaturas: Asignatura;
+  grado: Grado;
+  eventos:Eventos[]
+  createdAt:Date;
+  updatedAt:Date;
 }
 
 export class Profesor {
@@ -27,10 +33,23 @@ export class Profesor {
   get apellidos(): string {
     return this.props.apellidos;
   }
-  get email(): string {
-    return this.props.email;
+  get identificacion(): string {
+    return this.props.identificacion;
   }
-  get especialidad(): string {
-    return this.props.especialidad;
+  get asignaturas(): Asignatura{
+    return this.props.asignaturas;
   }
+  get grado(): Grado {
+    return this.props.grado;
+  }
+  get eventos():Eventos[]{
+    return this.props.eventos;
+  }
+  get createdAt(): Date {
+    return this.props.createdAt;
+  }
+  get updatedAt(): Date {
+    return this.props.updatedAt;
+  }
+    
 }

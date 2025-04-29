@@ -6,14 +6,14 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { CrearEstudianteService } from '../application/crear-estudiante.service';
+import { EstudianteService } from '../application/estudiante.service';
 import { CrearEstudianteDto } from 'src/shared/dtos/estudiantes.dto';
 import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 import { EstudianteEntity } from 'src/infraestructure/database/entities/estudiantes/estudiantes.entity';
 
 @Controller('estudiantes')
 export class EstudianteController {
-  constructor(private readonly createStudentService: CrearEstudianteService) {}
+  constructor(private readonly createStudentService: EstudianteService) {}
 
   @Post('crear-estudiante')
   @UseGuards(JwtAuthGuard)

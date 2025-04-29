@@ -1,10 +1,12 @@
-import { Calificacion, ProfesorAsignatura } from ".";
+import { Calificacion, Profesor } from ".";
 
 export interface AsignaturaProps {
     id?: string;
     nombre: string;
+    createdAt?: Date;
+    updatedAt?: Date;
     calificaciones?: Calificacion[];
-    profesoresAsignados?: ProfesorAsignatura[];
+    profesor?: Profesor[];
 }
 
 export class Asignatura {
@@ -26,7 +28,7 @@ export class Asignatura {
     get calificaciones(): Calificacion[] | undefined {
         return this.props.calificaciones;
     }
-    get profesoresAsignados(): ProfesorAsignatura[] | undefined {
-        return this.props.profesoresAsignados;
+    get profesor(): Profesor[] | undefined {
+        return this.props.profesor;
     }
 }

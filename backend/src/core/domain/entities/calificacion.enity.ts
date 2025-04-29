@@ -1,6 +1,4 @@
-import { Asignatura } from "./asignatura.entity";
-import { Estudiante } from "./estudiantes.entity";
-import { Grado } from "./grado.entity";
+import { Estudiante, Asignatura, Periodo} from ".";
 
 export class CalificacionProps {
     id?: string;
@@ -12,8 +10,7 @@ export class CalificacionProps {
     notaFinal: number;
     estudiante: Estudiante;
     asignatura: Asignatura;
-    grado: Grado;
-    periodoId: string;
+    periodo: Periodo;
 }
 
 export class Calificacion {
@@ -57,11 +54,9 @@ export class Calificacion {
     get asignatura(): Asignatura {
         return this.props.asignatura;
     }
-    get grado(): Grado {
-        return this.props.grado;
-    }
-    get periodoId(): string {
-        return this.props.periodoId;
+
+    get periodo(): Periodo {
+        return this.props.periodo;
     }
 
 }
