@@ -1,7 +1,6 @@
 import { Grado } from 'src/core/domain/entities';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { EstudianteEntity } from '../estudiantes/estudiantes.entity';
-import { ProfesorAsignaturaEntity } from '../profesor-asignatura/profesor-asignatura.entity';
 import { ProfesorEntity } from '../profesor/profesor.entity';
 
 @Entity('grados')

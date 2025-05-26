@@ -1,4 +1,4 @@
-import { Estudiante, Asignatura, Periodo} from ".";
+import { Estudiante, Asignatura, Periodo } from ".";
 
 export class CalificacionProps {
     id?: string;
@@ -11,6 +11,8 @@ export class CalificacionProps {
     estudiante: Estudiante;
     asignatura: Asignatura;
     periodo: Periodo;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export class Calificacion {
@@ -57,6 +59,12 @@ export class Calificacion {
 
     get periodo(): Periodo {
         return this.props.periodo;
+    }
+    get createdAt(): Date {
+        return this.props.createdAt!;
+    }
+    get updatedAt(): Date {
+        return this.props.updatedAt!;
     }
 
 }

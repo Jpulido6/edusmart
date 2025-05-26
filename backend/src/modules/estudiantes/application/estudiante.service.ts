@@ -6,6 +6,7 @@ import { ICalificacionRepository } from 'src/core/domain/interfaces/calificacion
 import { Calificacion } from 'src/core/domain/entities';
 import { IAsignaturaRepository } from 'src/core/domain/interfaces/asignatura.interface';
 import { IPeriodoRepository } from 'src/core/domain/interfaces/periodo.interface';
+import { CalificacionService } from 'src/modules/calificaciones/application/calificaciones.service';
 
 @Injectable()
 export class EstudianteService {
@@ -18,6 +19,7 @@ export class EstudianteService {
 
     @Inject('ICalificacionRepository')
     private readonly calificacionRepository: ICalificacionRepository,
+    private readonly calificacionService: CalificacionService,
 
     @Inject('IAsignaturaRepository')
     private readonly asignaturaRepository: IAsignaturaRepository,
@@ -26,12 +28,12 @@ export class EstudianteService {
     private readonly periodoRepository: IPeriodoRepository,
   ) { }
 
-  async execute(data: {
+  async crear(data: {
     firstName: string;
     lastName: string;
     identification: string;
     gradoId: number;
-    calificaciones?: { asignaturaId: number, periodoId: number, grados: number[] }[];
+    calificaciones?: { asignaturaId: string, periodoId: number, notas: number[] }[];
   }): Promise<Estudiante> {
     const existingStudent = await this.studentRepository.findByIdentificacion(
       data.identification,
@@ -59,37 +61,17 @@ export class EstudianteService {
     const estudianteGuardado = await this.studentRepository.save(student);
 
     if (data.calificaciones && data.calificaciones.length > 0) {
-      const calificaciones = data.calificaciones.map(async (calificacion) => {
-        if (calificacion.grados.length !== 5) {
-          throw new Error('Debe ingresar 5 calificaciones');
-        }
-
-        const asignatura = await this.asignaturaRepository.findById(calificacion.asignaturaId);
-        if (!asignatura) {
-          throw new Error(`Asignatura con ${calificacion.asignaturaId}  no encontrada`);
-        }
-
-        const periodo = await this.periodoRepository.findById(calificacion.periodoId);
-        if (!periodo) {
-          throw new Error(`Periodo con ${calificacion.periodoId} no encontrado`);
-        }
-        const promedio = calificacion.grados.reduce((a, b) => a + b, 0) / calificacion.grados.length;
-
-        return new Calificacion({
-          nota1: calificacion.grados[1],
-          nota2: calificacion.grados[2],
-          nota3: calificacion.grados[3],
-          nota4: calificacion.grados[4],
-          nota5: calificacion.grados[5],
-          notaFinal: promedio,
-          estudiante: estudianteGuardado,
-          asignatura: asignatura,
-          periodo: periodo,
+      const calificaciones = await Promise.all(
+        data.calificaciones.map(async (calificacion) => {
+          return this.calificacionService.create({
+            estudianteId: estudianteGuardado.id,
+            asignaturaId: calificacion.asignaturaId,
+            periodoId: calificacion.periodoId,
+            notas: calificacion.notas
+          })
         })
-
-      })
-
-      // await this.calificacionRepository.save()
+      )
+      estudianteGuardado.calificacion.push(...calificaciones);
 
     }
 

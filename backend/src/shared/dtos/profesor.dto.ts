@@ -1,4 +1,6 @@
-import { IsNotEmpty, IsString, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsString, IsEmail, IsDate } from 'class-validator';
+import { Asignatura, Grado } from 'src/core/domain/entities';
+import { Eventos } from 'src/core/domain/entities/eventos.entity';
 
 export class CrearProfesorDto {
   @IsNotEmpty()
@@ -9,10 +11,23 @@ export class CrearProfesorDto {
   @IsString()
   apellidos: string;
 
-  @IsEmail()
-  email: string;
-
   @IsNotEmpty()
   @IsString()
   especialidad: string;
+
+  @IsString()
+  identificacion: string;
+
+
+  asignaturas: Asignatura;
+
+  grado: Grado;
+
+  eventos: Eventos[]
+
+  @IsDate()
+  createdAt: Date;
+
+  @IsDate()
+  updatedAt: Date;
 }

@@ -10,6 +10,7 @@ import { EstudianteService } from '../application/estudiante.service';
 import { CrearEstudianteDto } from 'src/shared/dtos/estudiantes.dto';
 import { JwtAuthGuard } from 'src/modules/auth/jwt-auth.guard';
 import { EstudianteEntity } from 'src/infraestructure/database/entities/estudiantes/estudiantes.entity';
+import { UserRole } from 'src/infraestructure/database/entities/users/users.entity';
 
 @Controller('estudiantes')
 export class EstudianteController {
@@ -21,13 +22,13 @@ export class EstudianteController {
     @Body() createStudentDto: CrearEstudianteDto,
     @Request() req,
   ) {
-    if (req.user.role !== 'admin') {
+    if ([UserRole.ADMIN, UserRole.TEACHER].indexOf(req.user.role) > 0) {
       throw new ForbiddenException(
-        'Solo administradores pueden crear estudiantes',
+        'Solo administradores o profesores pueden crear estudiantes',
       );
     }
 
-    const student = await this.createStudentService.execute(createStudentDto);
+    const student = await this.createStudentService.crear(createStudentDto);
     const estudianteEntity = EstudianteEntity.fromDomain(student);
     return {
       status: 200,

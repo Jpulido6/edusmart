@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsString, IsEmail, IsNumber } from 'class-validator';
 
 export class CrearEstudianteDto {
   @IsNotEmpty()
@@ -9,6 +9,11 @@ export class CrearEstudianteDto {
   @IsString()
   lastName: string;
 
-  @IsEmail()
-  email: string;
+  @IsString()
+  identification: string;
+
+  @IsNumber()
+  gradoId: number;
+  
+  calificaciones?: { asignaturaId: string, periodoId: number, grados: number[] }[];
 }
