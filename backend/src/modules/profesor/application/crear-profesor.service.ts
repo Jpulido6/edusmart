@@ -3,11 +3,12 @@ import { Profesor } from 'src/core/domain/entities/profesor.entity';
 import { ProfesorPostgresRepository } from '../infraestructure/profesor.repository';
 import { Asignatura, Grado } from 'src/core/domain/entities';
 import { Eventos } from 'src/core/domain/entities/eventos.entity';
+import { PROVIDE } from 'src/shared/constant/provide.constant';
 
 @Injectable()
 export class CrearProfesorService {
   constructor(
-    @Inject('IProfesorRepository')
+    @Inject(PROVIDE.PROFESOR)
     private readonly proRepository: ProfesorPostgresRepository,
   ) { }
 

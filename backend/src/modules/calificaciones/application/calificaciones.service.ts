@@ -1,24 +1,26 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 
 import { Calificacion } from 'src/core/domain/entities';
+
 import { IAsignaturaRepository } from 'src/core/domain/interfaces/asignatura.interface';
 import { ICalificacionRepository } from 'src/core/domain/interfaces/calificaciones.interface';
 import { IEstudianteRepository } from 'src/core/domain/interfaces/estudiantes.interface';
 import { IPeriodoRepository } from 'src/core/domain/interfaces/periodo.interface';
+import { PROVIDE } from 'src/shared/constant/provide.constant';
 
 @Injectable()
 export class CalificacionService {
   constructor(
-    @Inject('ICalificacionRepository')
+    @Inject(PROVIDE.CALIFICACION)
     private readonly calificacionEntity: ICalificacionRepository,
 
-    @Inject('IAsignaturaRepository')
+    @Inject(PROVIDE.ASIGNATURA)
     private readonly asignaturaEntity: IAsignaturaRepository,
 
-    @Inject('IEstudiantesRepository')
+    @Inject(PROVIDE.ESTUDIANTE)
     private readonly estudianteEntity: IEstudianteRepository,
 
-    @Inject('IPeriodoRepository')
+    @Inject(PROVIDE.PERIODO)
     private readonly periodoEntity: IPeriodoRepository
   ) { }
 

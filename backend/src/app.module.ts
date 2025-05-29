@@ -7,6 +7,10 @@ import { AuthModule } from './modules/auth/auth.module';
 import { EstudianteModule } from './modules/estudiantes/estudiante.module';
 import { ProfesorModule } from './modules/profesor/profesor.module';
 import { AsignaturasModule } from './modules/asignaturas/asignaturas.module';
+import { GradosModule } from './modules/grados/grados.module';
+import { CalificacionesModule } from './modules/calificaciones/calificaciones.module';
+import { EventoModule } from './modules/eventos/eventos.module';
+import { PeriodoModule } from './modules/periodo/periodo.module';
 
 import { UserEntity } from './infraestructure/database/entities/users/users.entity';
 import { EstudianteEntity } from './infraestructure/database/entities/estudiantes/estudiantes.entity';
@@ -15,7 +19,7 @@ import { CalificacionEntity } from './infraestructure/database/entities/califica
 import { EventoEntity } from './infraestructure/database/entities/eventos/eventos.entity';
 import { GradosEntity } from './infraestructure/database/entities/grados/grados.entity';
 import { AsignaturaEntity } from './infraestructure/database/entities/asignaturas/asignaturas.entity';
-import { CalificacionesModule } from './modules/calificaciones/calificaciones.module';
+import { PeriodoEntity } from './infraestructure/database/entities/periodo/periodo.entity';
 
 
 
@@ -40,8 +44,9 @@ import { CalificacionesModule } from './modules/calificaciones/calificaciones.mo
         ProfesorEntity, 
         CalificacionEntity, 
         AsignaturaEntity,
-        // EventoEntity, 
-        // GradosEntity, 
+        GradosEntity,
+        PeriodoEntity,
+        EventoEntity, 
       ],
       synchronize: true,
     }),
@@ -49,8 +54,11 @@ import { CalificacionesModule } from './modules/calificaciones/calificaciones.mo
     UserModule,
     EstudianteModule,
     ProfesorModule,
+    PeriodoModule,
     AsignaturasModule,
     CalificacionesModule,
+    GradosModule,
+    EventoModule
   ],
   controllers: [],
   providers: [],

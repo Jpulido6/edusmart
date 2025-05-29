@@ -15,8 +15,8 @@ export class ProfesorEntity {
   @Column()
   apellidos: string;
 
-  @Column()
-  identification: string;
+  @Column({nullable:true})
+  identificacion: string;
 
   @ManyToOne(() => AsignaturaEntity, asignatura => asignatura.profesores)
   asignatura: AsignaturaEntity
@@ -38,7 +38,7 @@ export class ProfesorEntity {
     if (profesor.id) entity.id = profesor.id;
     entity.nombres = profesor.nombres;
     entity.apellidos = profesor.apellidos;
-    entity.identification = profesor.identificacion;
+    entity.identificacion = profesor.identificacion;
     entity.asignatura = AsignaturaEntity.fromDomain(profesor.asignaturas);
     entity.grado = GradosEntity.fromDomain(profesor.grado);
     entity.eventos = profesor.eventos.map(evento => EventoEntity.fromDomain(evento));
@@ -51,7 +51,7 @@ export class ProfesorEntity {
       id: this.id,
       nombres: this.nombres,
       apellidos: this.apellidos,
-      identificacion: this.identification,
+      identificacion: this.identificacion,
       asignaturas: this.asignatura.toDomain(),
       grado: this.grado.toDomain(),
       eventos: this.eventos.map(evento => evento.toDomain()),

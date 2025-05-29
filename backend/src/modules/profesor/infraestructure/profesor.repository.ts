@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { Profesor } from 'src/core/domain/entities/profesor.entity';
+
 import { IProfesorRepository } from 'src/core/domain/interfaces/profesor.interface';
+
 import { AsignaturaEntity } from 'src/infraestructure/database/entities/asignaturas/asignaturas.entity';
 import { EventoEntity } from 'src/infraestructure/database/entities/eventos/eventos.entity';
 import { GradosEntity } from 'src/infraestructure/database/entities/grados/grados.entity';
 import { ProfesorEntity } from 'src/infraestructure/database/entities/profesor/profesor.entity';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProfesorPostgresRepository implements IProfesorRepository {
@@ -14,8 +17,8 @@ export class ProfesorPostgresRepository implements IProfesorRepository {
     @InjectRepository(ProfesorEntity)
     private readonly profesorRepo: Repository<ProfesorEntity>,
   ) { }
-  async buscarByIdentificacion(identification: string): Promise<Profesor | null> {
-    const profEntity = await this.profesorRepo.findOne({ where: { identification } })
+  async buscarByIdentificacion(identificacion: string): Promise<Profesor | null> {
+    const profEntity = await this.profesorRepo.findOne({ where: { identificacion } })
 
     return profEntity ? profEntity.toDomain() : null
   }
@@ -27,7 +30,7 @@ export class ProfesorPostgresRepository implements IProfesorRepository {
   async buscarById(id: string): Promise<Profesor | null> {
     const profEntity = await this.profesorRepo.findOne({
       where: { id },
-      relations: ['materia']
+      relations: ['asignatura']
     })
 
     return profEntity ? profEntity.toDomain() : null
@@ -43,7 +46,7 @@ export class ProfesorPostgresRepository implements IProfesorRepository {
       id: crypto.randomUUID(),
       nombres: pro.nombres,
       apellidos: pro.apellidos,
-      identification: pro.identificacion,
+      identificacion: pro.identificacion,
       asignatura: AsignaturaEntity.fromDomain(pro.asignaturas),
       grado: GradosEntity.fromDomain(pro.grado),
       eventos: pro.eventos.map(proEntity => EventoEntity.fromDomain(proEntity)),

@@ -5,8 +5,7 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
-  OneToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { GradosEntity } from '../grados/grados.entity';
@@ -14,7 +13,7 @@ import { CalificacionEntity } from '../calificaciones/calificaciones.entity';
 
 @Entity('estudiantes')
 export class EstudianteEntity {
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ length: 100 })

@@ -1,30 +1,34 @@
-import { Estudiante } from 'src/core/domain/entities/estudiantes.entity';
-import { IEstudianteRepository } from 'src/core/domain/interfaces/estudiantes.interface';
 import { Inject, Injectable } from '@nestjs/common';
+
+
+import { CalificacionService } from 'src/modules/calificaciones/application/calificaciones.service';
+
+import { IEstudianteRepository } from 'src/core/domain/interfaces/estudiantes.interface';
 import { IGradoRepository } from 'src/core/domain/interfaces/grado.interfaces';
 import { ICalificacionRepository } from 'src/core/domain/interfaces/calificaciones.interface';
-import { Calificacion } from 'src/core/domain/entities';
 import { IAsignaturaRepository } from 'src/core/domain/interfaces/asignatura.interface';
 import { IPeriodoRepository } from 'src/core/domain/interfaces/periodo.interface';
-import { CalificacionService } from 'src/modules/calificaciones/application/calificaciones.service';
+
+import { Estudiante } from 'src/core/domain/entities/estudiantes.entity';
+import { PROVIDE } from 'src/shared/constant/provide.constant';
 
 @Injectable()
 export class EstudianteService {
   constructor(
-    @Inject('IEstudianteRepository')
+    @Inject(PROVIDE.ESTUDIANTE)
     private readonly studentRepository: IEstudianteRepository,
 
-    @Inject('IGradoRepository')
+    @Inject(PROVIDE.GRADO)
     private readonly gradoRepository: IGradoRepository,
 
-    @Inject('ICalificacionRepository')
+    @Inject(PROVIDE.CALIFICACION)
     private readonly calificacionRepository: ICalificacionRepository,
     private readonly calificacionService: CalificacionService,
 
-    @Inject('IAsignaturaRepository')
+    @Inject(PROVIDE.ASIGNATURA)
     private readonly asignaturaRepository: IAsignaturaRepository,
 
-    @Inject('IPeriodoRepository')
+    @Inject(PROVIDE.PERIODO)
     private readonly periodoRepository: IPeriodoRepository,
   ) { }
 

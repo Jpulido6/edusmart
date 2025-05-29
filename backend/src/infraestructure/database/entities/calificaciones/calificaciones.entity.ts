@@ -3,10 +3,9 @@ import {
     CreateDateColumn,
     Entity,
     ManyToOne,
-    PrimaryColumn,
+    PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { GradosEntity } from '../grados/grados.entity';
 import { EstudianteEntity } from '../estudiantes/estudiantes.entity';
 import { Calificacion } from 'src/core/domain/entities/calificacion.enity';
 import { PeriodoEntity } from '../periodo/periodo.entity';
@@ -14,7 +13,7 @@ import { AsignaturaEntity } from '../asignaturas/asignaturas.entity';
 
 @Entity('calificaciones')
 export class CalificacionEntity {
-    @PrimaryColumn('uuid')
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column('decimal', { precision: 5, scale: 2 })

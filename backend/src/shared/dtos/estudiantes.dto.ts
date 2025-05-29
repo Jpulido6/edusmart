@@ -15,5 +15,5 @@ export class CrearEstudianteDto {
   @IsNumber()
   gradoId: number;
   
-  calificaciones?: { asignaturaId: string, periodoId: number, grados: number[] }[];
+  calificaciones?: { asignaturaId: string, periodoId: number, notas: number[] }[];
 }
